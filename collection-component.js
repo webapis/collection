@@ -5,7 +5,7 @@ customElements.define('collection-component', class extends HTMLElement{
 
     async connectedCallback(){
         this.innerHTML=`<div id="container"></div>`
-        const response = await fetch('https://res.cloudinary.com/codergihub/raw/upload/collection2022.json')
+        const response = await fetch('https://res.cloudinary.com/codergihub/raw/upload/collection2022.json',{cache:'reload'})
         const data = await response.json()
         const collection = data.filter((d,i)=> i<25)
         const cloudinaryUrl ='https://res.cloudinary.com/codergihub/image/fetch/h_200/'
