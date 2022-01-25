@@ -38,7 +38,8 @@
  }
 
 
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
+
     img{
         width:230px ;
         margin-right: 4px;
@@ -69,6 +70,7 @@
 
 
 @media (min-width: 1400px) {
+ 
     img{
         width:230px;
         margin-right: 4px;
@@ -80,5 +82,14 @@
     justify-content: center;
 }
 
-
+.container-fluid{
+    
+    
+    display: flex;
+    justify-content: center;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
   }
