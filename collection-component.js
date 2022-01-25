@@ -7,11 +7,9 @@ customElements.define('collection-component', class extends HTMLElement{
 
   
         if(window.IntersectionObserver){
-        
             let observer = new IntersectionObserver((entries, observer) => { 
                 entries.forEach(entry => {
                 if(entry.isIntersecting){
- 
                     console.log(entry);
                     entry.target.src = entry.target.dataset.src;
                     observer.unobserve(entry.target);
@@ -19,10 +17,9 @@ customElements.define('collection-component', class extends HTMLElement{
                 });
             }, {threshold:0.1});
             window.obz=observer
-   
         }
         
-        else document.querySelector('#warning').style.display = 'block';
+      
      
        
    
@@ -37,7 +34,7 @@ customElements.define('collection-component', class extends HTMLElement{
             const {imageUrl,priceBasket,priceNew,priceOld,title,link}=col
      
             document.getElementById('container').insertAdjacentHTML('beforeend',`
-           <product-component id="pc-${i}"  class="item" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+           <product-component id="pc-${i}"  class="p-component" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)
