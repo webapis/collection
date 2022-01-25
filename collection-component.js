@@ -19,11 +19,6 @@ customElements.define('collection-component', class extends HTMLElement{
             window.obz=observer
         }
         
-      
-     
-       
-   
-        
 
         this.innerHTML=`<div class="container-fluid"><div id="container" class="container"></div></div>`
         const response = await fetch('https://res.cloudinary.com/codergihub/raw/upload/collection2022.json',{cache:'reload'})
