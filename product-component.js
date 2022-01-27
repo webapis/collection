@@ -19,8 +19,13 @@ customElements.define('product-component', class extends HTMLElement {
         const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/co_rgb:FFFFFF,l_text:Verdana_15_underline_letter_spacing_0:${host}/fl_layer_apply,g_south,y_0.0/`
         debugger;
         const imgPlaceholder =this.getAttribute('plcHolder') 
-        const timestamp =parseInt( this.getAttribute('timestamp'))
-        
+        const date2 =parseInt( this.getAttribute('timestamp'))
+        const date1 = Date.now()
+        const hour= Math.floor( Math.abs(date1 - date2) / 36e5);
+        const minutesdiff = Math.abs(new Date(date1) - new Date(date2));
+        var minutes = Math.floor((minutesdiff/1000)/60);
+        var days =Math.floor( minutesdiff / (1000 * 60 * 60 * 24));
+        var month = Math.round(minutesdiff / (2e3 * 3600 * 365.25));
         debugger;
         this.innerHTML = `<div class="product-item">
         
@@ -34,7 +39,7 @@ customElements.define('product-component', class extends HTMLElement {
         <div class="price-new">${'₺'+priceNew}</div>
         </div>
         <div class="price-basket"> ${(basketDiscount !=='undefined' && basketDiscount !=='null' ) ? `<span style="font-size:10px;">Sepette % ${basketDiscount} indirim </span>`+ `<span style="font-weight:700;">₺${priceBasket}</span>`:'' }</div>
-        <div class="timestamp">${timestamp}</div>
+        <div class="timestamp">${minutes<=59 ? minutes+' dakika önce': hour<=24 ?hour +' saat önce':days <=31? days+'gün önce':month + 'ay önce' }</div>
         </div>
         <div>`
         window.obz.observe(this.querySelector('img'))
