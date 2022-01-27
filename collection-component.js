@@ -35,10 +35,10 @@ customElements.define('collection-component', class extends HTMLElement{
         const collection = data.filter((d,i)=> i)
      
         collection.forEach((col,i)=>{
-            const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount,plcHolder,timestamp}=col
+            const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount,plcHolder,timestamp,discPerc}=col
      
             document.getElementById('container').insertAdjacentHTML('beforeend',`
-           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)
