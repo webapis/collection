@@ -20,16 +20,25 @@ customElements.define('collection-component', class extends HTMLElement{
         }
         
 
-        this.innerHTML=`<div class="container-fluid"><div id="container" class="container"></div></div>`
-        const response = await fetch('https://res.cloudinary.com/codergihub/raw/upload/collection2022.json',{cache:'reload'})
+        this.innerHTML=`<div class="container-fluid">
+      
+        <div id="container" class="container">
+     
+        </div></div>`
+        const dataurl = localStorage.getItem('data-url')
+        const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
+        debugger;
+        const response = await fetch(url,{cache:'reload'})
+        debugger;
         const data = await response.json()
+        debugger;
         const collection = data.filter((d,i)=> i)
      
         collection.forEach((col,i)=>{
-            const {imageUrl,priceBasket,priceNew,priceOld,title,link}=col
+            const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount}=col
      
             document.getElementById('container').insertAdjacentHTML('beforeend',`
-           <product-component id="pc-${i}"  class="p-component" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+           <product-component id="pc-${i}"   class="p-component" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)
