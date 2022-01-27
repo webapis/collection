@@ -6,7 +6,10 @@
     padding: 3px;
 
 }
-
+.timestamp{
+    font-size: 8px;
+    text-align: end;
+}
 .p-component {
     background-color: whitesmoke;
     margin-bottom: 4px;

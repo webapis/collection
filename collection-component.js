@@ -27,18 +27,18 @@ customElements.define('collection-component', class extends HTMLElement{
         </div></div>`
         const dataurl = localStorage.getItem('data-url')
         const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
-        debugger;
+      
         const response = await fetch(url,{cache:'reload'})
-        debugger;
+   
         const data = await response.json()
-        debugger;
+      
         const collection = data.filter((d,i)=> i)
      
         collection.forEach((col,i)=>{
-            const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount}=col
+            const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount,plcHolder,timestamp}=col
      
             document.getElementById('container').insertAdjacentHTML('beforeend',`
-           <product-component id="pc-${i}"   class="p-component" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)
