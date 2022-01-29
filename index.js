@@ -1,13 +1,10 @@
 console.log('index.js loaded')
 
 function extractPercentage(val1,val2){
- 
-
     const value1ll=parseInt(val1.substring(0,leftLastIndex(val1)).replace('.',''))
    // const value1ss =rightSideValue(val1)
     const value2ll=parseInt( val2.substring(0,leftLastIndex(val2)).replace('.',''))
  //   const value2ss =rightSideValue(val2)
-
     const percentage =Math.floor( (((value1ll)-(value2ll))*100)/(value1ll))
  return  percentage
 }

@@ -17,7 +17,7 @@ customElements.define('product-component', class extends HTMLElement {
         const aTag =document.createElement('a')
         aTag.href=link
         const host =aTag.hostname
-        const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/co_rgb:FFFFFF,l_text:Verdana_15_underline_letter_spacing_0:${host}/fl_layer_apply,g_south,y_0.0/`
+        const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/`
         debugger;
         const imgPlaceholder =this.getAttribute('plcHolder') 
         const date2 =parseInt( this.getAttribute('timestamp'))
@@ -31,6 +31,7 @@ customElements.define('product-component', class extends HTMLElement {
         this.innerHTML = `<div class="product-item">
         
         <img src="${imgPlaceholder}" class="card-img-top" alt="d" data-src="${cloudinaryUrl + imageUrl}">
+        <div class="m-name">${host}</div>
         <div class="p-detail">
         <div class="p-title">
         ${title}
@@ -38,10 +39,11 @@ customElements.define('product-component', class extends HTMLElement {
         <div class="price">
         <div class="price-old">${priceOld !=='null'? '₺'+ priceOld:''}</div>
         <div class="price-new">${'₺'+priceNew}</div>
-        ${discPerc !=='null'? `<div class="disc-perc"><span>-${discPerc}%<span></div>`:''  }
+        ${discPerc !=='null'? `<div class="disc-perc"><span>${discPerc}% Indirim<span></div>`:''  }
         
         </div>
-        <div class="price-basket"> ${(basketDiscount !=='undefined' && basketDiscount !=='null' ) ? `<span style="font-size:10px;">Sepette % ${basketDiscount} indirim </span>`+ `<span style="font-weight:700;">₺${priceBasket}</span>`:'' }</div>
+        ${(priceBasket !=='undefined' && priceBasket !=='null' )  ?`<div class="price-basket"> <span style="font-size:10px;">Sepette % ${basketDiscount} indirim </span>`+ `<span style="font-weight:700;">₺${priceBasket}</span></div>`:''}
+
         <div class="timestamp">${minutes<=59 ? minutes+' dakika önce': hour<=24 ?hour +' saat önce':days <=31? days+'gün önce':month + 'ay önce' }</div>
         </div>
         <div>`

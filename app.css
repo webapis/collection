@@ -1,7 +1,11 @@
 * {
     font-family: Mulish, Open Sans, sans-serif;
 }
-
+.m-name{
+    background-color:darkgray;
+    color: whitesmoke;
+    
+}
 .disc-perc{
 
     color: red;
@@ -59,7 +63,9 @@
 
         margin-right: 4px;
     }
-
+.m-name{
+    width: 150px;
+}
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -89,7 +95,9 @@
         width: 150px;
         margin-right: 4px;
     }
-
+    .m-name{
+        width: 150px;
+    }
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -120,7 +128,9 @@
         width: 230px;
         margin-right: 4px;
     }
-
+    .m-name{
+        width: 230px;
+    }
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -151,7 +161,9 @@
         width: 230px;
         margin-right: 2px;
     }
-
+    .m-name{
+        width: 230px;
+    }
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -185,7 +197,9 @@
         width: 230px;
         margin-right: 4px;
     }
-
+    .m-name{
+        width: 230px;
+    }
     .container {
         display: flex;
         flex-wrap: wrap;
