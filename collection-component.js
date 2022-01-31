@@ -30,7 +30,7 @@ customElements.define('collection-component', class extends HTMLElement{
       const url ="/atlas/"
         const response = await fetch(url,{cache:'reload'})
         debugger;
-        const data = await response.json()
+        const {data} = await response.json()
         debugger;
         const collection = data.filter((d,i)=> i)
      debugger;
