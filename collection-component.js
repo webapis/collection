@@ -27,7 +27,7 @@ customElements.define('collection-component', class extends HTMLElement{
         </div></div>`
         const dataurl = localStorage.getItem('data-url')
       //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
-      const url ="/.netlify/functions/atlas"
+      const url ="/atlas/"
         const response = await fetch(url,{cache:'reload'})
    
         const data = await response.json()
