@@ -29,11 +29,11 @@ customElements.define('collection-component', class extends HTMLElement{
       //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
       const url ="/atlas/"
         const response = await fetch(url,{cache:'reload'})
-   
+        debugger;
         const data = await response.json()
-      
+        debugger;
         const collection = data.filter((d,i)=> i)
-     
+     debugger;
         collection.forEach((col,i)=>{
             const {imageUrl,priceBasket,priceNew,priceOld,title,link,basketDiscount,plcHolder,timestamp,discPerc}=col
      
