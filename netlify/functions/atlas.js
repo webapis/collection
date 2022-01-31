@@ -12,12 +12,3 @@ return {
 }
 }
 
-/*
- const clnt= await   client.connect(async err => {
-        const collection = client.db("ecom").collection("collection2023");
-        // perform actions on the collection object
-        const response = await collection.bulkWrite(bulkData)
-        debugger;
-        client.close();
-      });
-*/
