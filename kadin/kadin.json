@@ -1,0 +1,66 @@
+[
+    {
+        "kategory": {
+            "name": "Giyim",
+            "url": "/kadin/giyim.html"
+        },
+        "subcategory": [
+            {
+                "name": "Elbise",
+                "url": "/kadin/elbise.html"
+            },
+            {
+                "name": "Sweatshirt",
+                "url": "/kadin/sweatshirt.html"
+            },
+            {
+                "name": "Eşofman Altı",
+                "url": "/kadin/esofman-alti.html"
+            },
+            {
+                "name": "Kazak",
+                "url": "/kadin/kazak.html"
+            },
+            {
+                "name": "Hırka",
+                "url": "/kadin/hırka.html"
+            },
+            {
+                "name": "Tişört Uzun Kol",
+                "url": "/kadin/tisort-uzunkol.html"
+            },
+            {
+                "name": "Pantolon",
+                "url": "/kadin/pantolon.html"
+            },
+            {
+                "name": "Kot Pantolon",
+                "url": "/kadin/kot-pantolon.html"
+            },
+            {
+                "name": "Etek",
+                "url": "/kadin/etek.html"
+            },
+            {
+                "name": "Tayt",
+                "url": "/kadin/tayt.html"
+            },
+            {
+                "name": "Gömlek",
+                "url": "/kadin/bluz.html"
+            },
+            {
+                "name": "Bluz",
+                "url": "/kadin/bluz.html"
+            },
+            {
+                "name": "Tunik",
+                "url": "/kadin/tunik.html"
+            },
+            {
+                "name": "Tişört",
+                "url": "/kadin/Tişört.html"
+            }
+        ]
+    }
+]

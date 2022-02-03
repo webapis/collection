@@ -20,15 +20,15 @@ customElements.define('collection-component', class extends HTMLElement {
         }
 
 
-        this.innerHTML = `<div class="container-fluid">
+        this.innerHTML = `
       
-        <div id="container" class="container">
+        <div id="container" class="row">
      
-        </div></div>`
+        </div>`
         const dataurl = localStorage.getItem('data-url')
         //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
-        const url = "/atlas/"
-        const response = await fetch(url, { cache: 'reload' })
+        const url = "http://localhost:8888/.netlify/functions/atlas"
+        const response = await fetch(url, { cache: 'default' })
         debugger;
         const { data } = await response.json()
         debugger;
@@ -38,7 +38,7 @@ customElements.define('collection-component', class extends HTMLElement {
             const { imageUrl, priceBasket, priceNew, priceOld, title, link, basketDiscount, plcHolder, timestamp, discPerc } = col
 
             document.getElementById('container').insertAdjacentHTML('beforeend', `
-           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component col" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)

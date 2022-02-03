@@ -15,8 +15,3 @@ function leftLastIndex(value){
 return value.lastIndexOf(',') !==-1 ?value.lastIndexOf(','):value.length
 }
 
-// function rightSideValue(value){
-//     let v = value.lastIndexOf(',') !==-1 ?  parseInt( value.substring(value.lastIndexOf(',')+1)):0
-  
-// return  v >=50 ? 1 :0
-// }
