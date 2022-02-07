@@ -18,7 +18,7 @@ customElements.define('product-component', class extends HTMLElement {
         aTag.href = link
         const host = aTag.hostname
         const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/`
-        debugger;
+        
         const imgPlaceholder = this.getAttribute('plcHolder')
         const date2 = parseInt(this.getAttribute('timestamp'))
         const date1 = Date.now()
@@ -27,7 +27,7 @@ customElements.define('product-component', class extends HTMLElement {
         var minutes = Math.floor((minutesdiff / 1000) / 60);
         var days = Math.floor(minutesdiff / (1000 * 60 * 60 * 24));
         var month = Math.round(minutesdiff / (2e3 * 3600 * 365.25));
-        debugger;
+        
         this.innerHTML = `<div class="row">
         
         <img src="${imgPlaceholder}" class="col-12 p-1" alt="d" data-src="${cloudinaryUrl + imageUrl}">

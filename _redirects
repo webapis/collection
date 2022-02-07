@@ -1,1 +1,3 @@
-/atlas/ /.netlify/functions/atlas
+/atlas/* /.netlify/functions/atlas:splat
+
+/categorynav/* /.netlify/functions/categorynav:splat

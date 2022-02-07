@@ -27,13 +27,15 @@ customElements.define('collection-component', class extends HTMLElement {
         </div>`
         const dataurl = localStorage.getItem('data-url')
         //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
-        const url = "http://localhost:8888/.netlify/functions/atlas"
+        const gender =localStorage.getItem('gender')
+        const subcategory =localStorage.getItem('subcategory')
+        const url = `/atlas?gender=${gender}&subcategory=${subcategory}`
         const response = await fetch(url, { cache: 'default' })
-        debugger;
+        
         const { data } = await response.json()
-        debugger;
+        
         const collection = data.filter((d, i) => i)
-        debugger;
+        
         collection.forEach((col, i) => {
             const { imageUrl, priceBasket, priceNew, priceOld, title, link, basketDiscount, plcHolder, timestamp, discPerc } = col
 

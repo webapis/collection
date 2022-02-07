@@ -3,7 +3,7 @@ document.head.insertAdjacentHTML('beforeend', '<link href="https://cdn.jsdelivr.
 
 console.log(window.location.pathname)
 
-debugger;
+
 
 Promise.all([
     import('./search-box.js'),  import('./bootstrap.bundle.min.js'),
@@ -15,8 +15,8 @@ Promise.all([
         document.body.insertAdjacentHTML('afterbegin', `<search-box></search-box>`)
     }
     if (document.getElementById('collection')) {
-        Promise.all([import('./collection-component.js'), import('./product-component.js'),import('./filter-panel.js')]).then(function () {
-            document.getElementById('collection').insertAdjacentHTML('afterbegin', `<filter-panel class="col-2"></filter-panel><collection-component class="col-10"></collection-component>`)
+        Promise.all([import('./collection-component.js'), import('./product-component.js'),import('./category-panel.js')]).then(function () {
+            document.getElementById('collection').insertAdjacentHTML('afterbegin', `<category-panel class="col-2"></category-panel><collection-component class="col-10"></collection-component>`)
         })
     }
    

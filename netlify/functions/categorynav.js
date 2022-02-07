@@ -11,32 +11,21 @@ const headers = {
 };
 
 exports.handler = async function (event, context) {
-    const { gender, subcategory } = event.queryStringParameters
+    const { gender } = event.queryStringParameters
 
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const clnt = await client.connect()
-    const collection = clnt.db("ecom").collection("collection2023");
-    const cursor = await collection.find({ gender, subcategory }).limit(5)
-    let navCollection = null
-    const data = await cursor.toArray()
-    switch (gender) {
-        case 'erkek':
-            navCollection = clnt.db("ecom").collection("erkek-nav");
-            break;
-        case 'kadın':
-            navCollection = clnt.db("ecom").collection("kadın-nav");
-            break;
-        default:
+    const collection = clnt.db("ecom").collection(`${gender}-nav`);
+    const cursor = await collection.find()
 
-    }
-    const navCursor = await navCollection.find()
-    const navData = await navCursor.toArray()
+    const data = await cursor.toArray()
+
     console.log('response', cursor)
     clnt.close()
     debugger;
     return {
         statusCode: 200, headers,
-        body: JSON.stringify({ data, nav: navData })
+        body: JSON.stringify({ data })
     }
 
 }

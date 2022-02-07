@@ -60,7 +60,7 @@ customElements.define('search-tabs', class extends HTMLElement {
         super()
     }
     connectedCallback() {
-        const seatchTab =localStorage.getItem('searchTab')
+        const seatchTab =localStorage.getItem('gender')
         this.innerHTML = `<ul class="nav nav-tabs justify-content-center">
    
         <li class="nav-item">
@@ -85,7 +85,7 @@ customElements.define('search-tabs', class extends HTMLElement {
       document.querySelectorAll('.search-tab').forEach(function(element){
           element.addEventListener('click',function(e){
               const {id}=e.target
-              localStorage.setItem('searchTab',id)
+              localStorage.setItem('gender',id)
               window.location.replace('/'+id+'/index.html')
           })
       })
