@@ -64,7 +64,7 @@ customElements.define('search-tabs', class extends HTMLElement {
         this.innerHTML = `<ul class="nav nav-tabs justify-content-center">
    
         <li class="nav-item">
-        <a class="nav-link ${seatchTab==='kadin' && 'active'} search-tab" href="#" id="kadin">KADIN</a>
+        <a class="nav-link ${seatchTab==='kadın' && 'active'} search-tab" href="#" id="kadın">KADIN</a>
         </li>
         <li class="nav-item">
             <a class="nav-link ${seatchTab==='erkek' && 'active'} search-tab" href="#" id="erkek">ERKEK</a>

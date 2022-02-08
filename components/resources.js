@@ -15,8 +15,8 @@ Promise.all([
         document.body.insertAdjacentHTML('afterbegin', `<search-box></search-box>`)
     }
     if (document.getElementById('collection')) {
-        Promise.all([import('./collection-component.js'), import('./product-component.js'),import('./category-panel.js')]).then(function () {
-            document.getElementById('collection').insertAdjacentHTML('afterbegin', `<category-panel class="col-2"></category-panel><collection-component class="col-10"></collection-component>`)
+        Promise.all([import('./collection-component.js'), import('./product-component.js'),import('./product-navigation.js')]).then(function () {
+            document.getElementById('collection').insertAdjacentHTML('afterbegin', `<product-navigation class="col-3"></product-navigation><collection-component class="col-9"></collection-component>`)
         })
     }
    

@@ -4,7 +4,10 @@ customElements.define('collection-component', class extends HTMLElement {
     }
 
     async connectedCallback() {
-
+        const dataurl = localStorage.getItem('data-url')
+        //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
+        const gender =localStorage.getItem('gender')
+        const subcategory =localStorage.getItem('subcategory')
 
         if (window.IntersectionObserver) {
             let observer = new IntersectionObserver((entries, observer) => {
@@ -25,10 +28,7 @@ customElements.define('collection-component', class extends HTMLElement {
         <div id="container" class="row">
      
         </div>`
-        const dataurl = localStorage.getItem('data-url')
-        //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
-        const gender =localStorage.getItem('gender')
-        const subcategory =localStorage.getItem('subcategory')
+    
         const url = `/atlas?gender=${gender}&subcategory=${subcategory}`
         const response = await fetch(url, { cache: 'default' })
         
