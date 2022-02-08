@@ -20,9 +20,9 @@ exports.handler = async function (event, context) {
 
     const data = await cursor.toArray()
 
-    console.log('response', cursor)
+
     clnt.close()
-    debugger;
+ 
     return {
         statusCode: 200, headers,
         body: JSON.stringify({ data })
