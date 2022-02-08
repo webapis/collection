@@ -41,7 +41,12 @@ customElements.define('collection-component', class extends HTMLElement {
                 let prevPage =parseInt( localStorage.getItem('page'))
                 let nextPage =++prevPage
                 localStorage.setItem('page',nextPage)
+                document.getElementById('collection-container').insertAdjacentHTML('beforeend',`<div id="spinner" class="d-flex justify-content-center align-items-center"><div  class="spinner-border text-info" style="width: 5rem; height: 5rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div></div>`)
                 await this.fetchData(nextPage*70)
+                var spinnerElem = document.getElementById('spinner');
+                spinnerElem.parentNode.removeChild(spinnerElem);
                 this.bottomReached=false
                 console.log('scrollHeight...', document.getElementById('collection-container').scrollHeight)
                 console.log('scrollTop...', document.getElementById('collection-container').scrollTop)
