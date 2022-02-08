@@ -5,6 +5,7 @@ customElements.define('collection-component', class extends HTMLElement {
 
     async connectedCallback() {
         const dataurl = localStorage.getItem('data-url')
+
         //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
         const gender =localStorage.getItem('gender')
         const subcategory =localStorage.getItem('subcategory')
@@ -24,8 +25,7 @@ customElements.define('collection-component', class extends HTMLElement {
 
 
         this.innerHTML = `
-      
-        <div id="container" class="row">
+        <div id="collection-container" class="row" style="height:100vh; overflow: scroll;">
      
         </div>`
     
@@ -39,8 +39,8 @@ customElements.define('collection-component', class extends HTMLElement {
         collection.forEach((col, i) => {
             const { imageUrl, priceBasket, priceNew, priceOld, title, link, basketDiscount, plcHolder, timestamp, discPerc } = col
 
-            document.getElementById('container').insertAdjacentHTML('beforeend', `
-           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component col" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+            document.getElementById('collection-container').insertAdjacentHTML('beforeend', `
+           <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component col-xl-2 col-lg-3 col-6 col-md-4" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
            title ="${title}" link="${link}"
            ></product-component>
             `)

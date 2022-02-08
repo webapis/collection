@@ -16,7 +16,7 @@ exports.handler = async function (event, context) {
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const clnt = await client.connect()
     const collection = clnt.db("ecom").collection("collection2023");
-    const cursor = await collection.find({ gender, subcategory }).limit(5)
+    const cursor = await collection.find({ gender, subcategory }).skip(0).limit(70)
     let navCollection = null
     const data = await cursor.toArray()
     switch (gender) {
