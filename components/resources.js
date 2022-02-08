@@ -1,5 +1,5 @@
 
-document.head.insertAdjacentHTML('beforeend', '<link href="/components/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">" rel="stylesheet">')
+document.head.insertAdjacentHTML('beforeend', '<link href="/components/bootstrap.min.css" rel="stylesheet">')
 document.body.insertAdjacentHTML('afterbegin',`  <div class="container-fluid">
 <div class="row">
 
