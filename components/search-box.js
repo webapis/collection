@@ -33,7 +33,7 @@ customElements.define('search-box', class extends HTMLElement {
             })
         })
 
-        const fullpath = window.location.pathname.split('/')
+        const fullpath = decodeURIComponent(window.location.pathname).split('/')
 const breadcrumb = fullpath.filter(function (f, i) {
     return i !== 0 && i !== fullpath.length - 1
 })
