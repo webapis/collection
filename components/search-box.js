@@ -86,6 +86,9 @@ customElements.define('search-tabs', class extends HTMLElement {
           element.addEventListener('click',function(e){
               const {id}=e.target
               localStorage.setItem('gender',id)
+              localStorage.removeItem('page')
+              localStorage.removeItem('category')
+              localStorage.removeItem('subcategory')
               window.location.replace('/'+id+'/index.html')
           })
       })

@@ -62,7 +62,9 @@ customElements.define('collection-component', class extends HTMLElement {
     async fetchData(page) {
         const gender = localStorage.getItem('gender')
         const subcategory = localStorage.getItem('subcategory')
-        const url = `/atlas?gender=${gender}&subcategory=${subcategory}&page=${page}`
+        const category=  localStorage.getItem('category')
+        const url = `/atlas?gender=${gender}&category=${category}&subcategory=${subcategory}&page=${page}`
+        debugger;
         const response = await fetch(url, { cache: 'default' })
 
         const { data } = await response.json()

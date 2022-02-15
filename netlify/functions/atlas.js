@@ -11,18 +11,26 @@ const headers = {
 };
 
 exports.handler = async function (event, context) {
-    const { gender, subcategory,page } = event.queryStringParameters
-    const skip =parseInt(page)
+    const { gender, subcategory, page, category } = event.queryStringParameters
+    const query = { subcategory: subcategory !== 'null' ? subcategory : undefined, category: category !== 'null' ? category : undefined, gender: gender !== 'null' ? gender : undefined }
 debugger;
+for(let item in query){
+    let current =query[item]
+    if(current===undefined){
+
+        delete query[item]
+    }
+    debugger;
+}
+    const skip = parseInt(page)
+    debugger;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const clnt = await client.connect()
     const collection = clnt.db("ecom").collection("collection2023");
-    const cursor = await collection.find({ gender, subcategory }).skip(skip).limit(70)
+    const cursor = await collection.find(query).skip(skip).limit(70)
 
     const data = await cursor.toArray()
 
-
-   
     clnt.close()
     debugger;
     return {
