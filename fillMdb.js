@@ -25,7 +25,7 @@ async function fetchRemoteData(event, context) {
      debugger;
      const localclient = new MongoClient(localUri, { useNewUrlParser: true, useUnifiedTopology: true });
      const lclclnt = await localclient.connect()
-    collectionNames.forEach(c=>{
+    collectionNames.forEach(async c=>{
         promises.push(await importData(lclclnt,c,))
     })
     // const collection = clnt.db("ecom").collection("collection2023");
