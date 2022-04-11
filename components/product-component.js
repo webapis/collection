@@ -19,7 +19,7 @@ customElements.define('product-component', class extends HTMLElement {
         const host = aTag.hostname
         const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/`
         
-        const imgPlaceholder = this.getAttribute('plcHolder')
+        const imgPlaceholder = this.getAttribute('plcHolder') 
         const date2 = parseInt(this.getAttribute('timestamp'))
         const date1 = Date.now()
         const hour = Math.floor(Math.abs(date1 - date2) / 36e5);
@@ -30,7 +30,7 @@ customElements.define('product-component', class extends HTMLElement {
         
         this.innerHTML = `<div class="row">
         
-        <img src="${imgPlaceholder}" class="col-12 p-1" alt="d" data-src="${cloudinaryUrl + imageUrl}">
+        <img src="${imgPlaceholder}" class="col-12 p-1" alt="d" data-src="${cloudinaryUrl + imageUrl}" >
         <div class="col mx-1  m-name fw-lighter text-center bg-secondary text-light">${host}</div>
         
         <div class="col-12 p-title fs-6 fw-lighter">${title}</div>
