@@ -17,7 +17,7 @@ customElements.define('product-component', class extends HTMLElement {
         const aTag = document.createElement('a')
         aTag.href = link
         const host = aTag.hostname
-        const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/`
+        const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250,h_350/`
         
         const imgPlaceholder = this.getAttribute('plcHolder') 
         const date2 = parseInt(this.getAttribute('timestamp'))
