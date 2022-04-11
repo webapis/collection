@@ -27,7 +27,7 @@ for(let item in query){
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const clnt = await client.connect()
     const collection = clnt.db("ecom").collection("collection2023");
-    const cursor = await collection.find(query).sort({itemOrder:1}).skip(skip).limit(70)
+    const cursor = await collection.find({ $query: query, $orderby: { itemOrder : 1 } }).skip(skip).limit(70)
 
     const data = await cursor.toArray()
 
