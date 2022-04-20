@@ -9,12 +9,398 @@
 
     <link href="/components/bootstrap.min.css" rel="stylesheet">
 </head>
-<script>
-    window.onerror=function(error){
-        alert(error.message)
-    }
-</script>
+
 <body>
-    <script src="/components/resources.js"></script>
+    <search-box></search-box>
+    <div class="container-fluid">
+        <div class="row">
+        
+          <div id="navigation" class="col-lg-3">
+            <product-navigation></product-navigation>
+            
+          </div>
+          <div id="collection" class="row col-lg-9">
+            <collection-component></collection-component>
+          </div>
+        </div>
+        
+        </div>
+
+        <script>
+            window.onerror=function(error){
+                alert(error.message)
+            }
+        
+            customElements.define('search-box', class extends HTMLElement {
+            constructor() {
+                super()
+                this.innerHTML = `<input placeholder="Arama..."/>sssss`
+            }
+        
+            connectedCallback() {
+                const location = window.location.pathname
+        
+        
+                this.innerHTML = `
+        
+                <div class="container">
+                <nav aria-label="breadcrumb">
+                <ol class="breadcrumb pt-3">
+                <li class="breadcrumb-item active" aria-current="page">Anasayfa</li>
+                </ol>
+                </nav>
+                <div class="row">
+               <search-input class="col pt-2"></search-input>
+               <search-tabs class="col-12 py-2"></search-tabs>
+               </div>
+               </div>
+               `
+        
+                document.querySelectorAll('.search-navs a').forEach(el => {
+                    el.addEventListener('click', function (e) {
+                        const { id } = e.target
+                        const location = window.location.pathname
+                        if (location.includes(id)) {
+                            e.preventDefault()
+                        }
+                    })
+                })
+        
+                const fullpath = decodeURIComponent(window.location.pathname).split('/')
+        const breadcrumb = fullpath.filter(function (f, i) {
+            return i !== 0 && i !== fullpath.length - 1
+        })
+        breadcrumb.forEach(function (b) {
+            document.querySelector('.breadcrumb').insertAdjacentHTML('beforeend', `<li class="breadcrumb-item active" aria-current="page">${b}</li>`)
+        })
+            }
+        })
+        
+        
+        customElements.define('search-input', class extends HTMLElement {
+            constructor() {
+                super()
+                this.innerHTML = `<div class="input-group">
+                <input type="text" class="form-control" placeholder="Arama yapın" aria-label="Arama yapın">
+                
+                <button class="btn btn-outline-secondary" type="button">Bul</button>
+              </div>`
+            }
+        })
+        
+        customElements.define('search-tabs', class extends HTMLElement {
+            constructor() {
+                super()
+            }
+            connectedCallback() {
+                const seatchTab =localStorage.getItem('gender')
+                this.innerHTML = `<ul class="nav nav-tabs justify-content-center">
+           
+                <li class="nav-item">
+                <a class="nav-link ${seatchTab==='kadın' && 'active'} search-tab" href="#" id="kadın">KADIN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${seatchTab==='erkek' && 'active'} search-tab" href="#" id="erkek">ERKEK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${seatchTab==='cocuk' && 'active'} search-tab" href="#" id="cocuk">ÇOCUK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${seatchTab==='bebek' && 'active'} search-tab" href="#"  id="bebek">BEBEK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${seatchTab==='ayakkabi' && 'active'} search-tab" href="#"  id="ayakkabi">AYAKKABI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ${seatchTab==='aksesuar' && 'active'} search-tab" href="#"  id="aksesuar">AKSESUAR</a>
+                </li>
+              </ul>`
+              document.querySelectorAll('.search-tab').forEach(function(element){
+                  element.addEventListener('click',function(e){
+                      const {id}=e.target
+                      localStorage.setItem('gender',id)
+                      localStorage.removeItem('page')
+                      localStorage.removeItem('category')
+                      localStorage.removeItem('subcategory')
+                      window.location.replace('/index.html')
+                  })
+              })
+            }
+        })
+        
+        
+        
+        customElements.define('product-component', class extends HTMLElement {
+            constructor() {
+                super()
+            }
+        
+            async connectedCallback() {
+        
+        
+                const imageUrl = this.getAttribute('imageUrl')
+                const priceBasket = this.getAttribute('priceBasket')
+                const priceNew = this.getAttribute('priceNew')
+                const priceOld = this.getAttribute('priceOld')
+                const basketDiscount = this.getAttribute('basketDiscount')
+                const discPerc = this.getAttribute('discPerc')
+                const title = this.getAttribute('title')
+                const link = this.getAttribute('link')
+                const aTag = document.createElement('a')
+                aTag.href = link
+                const host = aTag.hostname
+                const cloudinaryUrl = `https://res.cloudinary.com/codergihub/image/fetch/w_250/`
+                
+                const imgPlaceholder = this.getAttribute('plcHolder') 
+                const date2 = parseInt(this.getAttribute('timestamp'))
+                const date1 = Date.now()
+                const hour = Math.floor(Math.abs(date1 - date2) / 36e5);
+                const minutesdiff = Math.abs(new Date(date1) - new Date(date2));
+                var minutes = Math.floor((minutesdiff / 1000) / 60);
+                var days = Math.floor(minutesdiff / (1000 * 60 * 60 * 24));
+                var month = Math.round(minutesdiff / (2e3 * 3600 * 365.25));
+                
+                this.innerHTML = `<div class="row">
+                
+                <img src="${imgPlaceholder}" class="col-12 p-1" alt="d" data-src="${cloudinaryUrl + imageUrl}" >
+                <div class="col mx-1  m-name fw-lighter text-center bg-secondary text-light">${host}</div>
+                
+                <div class="col-12 p-title fs-6 fw-lighter">${title}</div>
+                <div class="col-12 row p-0 m-0">
+                <div class="col-6">
+                <div class="col text-decoration-line-through fs-6">${priceOld !== 'null' ? '₺' + priceOld : ''}</div>
+                <div class="col fs-6">${'₺' + priceNew}</div>
+                </div>
+         
+                ${discPerc !== 'null' ? `<div class="col"><span class="col badge bg-primary text-wrap">${discPerc}% Indirim<span></div>` : ''}
+                </div>
+                
+                
+               
+                </div>
+                </div>
+                ${(priceBasket !== 'undefined' && priceBasket !== 'null') ? `<div class="col price-basket"> <span style="font-size:10px;">Sepette % ${basketDiscount} indirim </span>` + `<span style="font-weight:700;">₺${priceBasket}</span></div>` : ''}
+        
+                <div class="timestamp col text-end" style="font-size:8px">${minutes <= 59 ? minutes + ' dakika önce' : hour <= 24 ? hour + ' saat önce' : days <= 31 ? days + 'gün önce' : month + 'ay önce'}</div>
+                `
+                window.obz.observe(this.querySelector('img'))
+            }
+        
+        
+        
+        
+        })
+        
+        
+        customElements.define('collection-component', class extends HTMLElement {
+            constructor() {
+                super()
+            }
+        
+            async connectedCallback() {
+                const dataurl = localStorage.getItem('data-url')
+                localStorage.setItem('page', 1)
+                this.bottomReached = false
+                //  const url ="https://res.cloudinary.com/codergihub/raw/upload/"+dataurl+".json"
+        
+        
+                if (window.IntersectionObserver) {
+                    let observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                //  console.log(entry);
+                                entry.target.src = entry.target.dataset.src;
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    window.obz = observer
+                }
+        
+        
+                this.innerHTML = `
+                <div id="collection-container" class="row" style="height:100vh; overflow: scroll;">
+             
+                </div>`
+                await this.fetchData(0)
+        
+                const scroller = document.getElementById('collection-container')
+                scroller.onscroll = async (ev) => {
+        
+                    const scrollHeight = scroller.scrollHeight
+                    const scrollTop = scroller.scrollTop
+                    const clientHeight = scroller.clientHeight
+                    if (scrollHeight === (scrollTop + clientHeight) && !this.bottomReached) {
+                        this.bottomReached = true
+                        let prevPage = parseInt(localStorage.getItem('page'))
+                        let nextPage = ++prevPage
+                        localStorage.setItem('page', nextPage)
+                        document.getElementById('collection-container').insertAdjacentHTML('beforeend', `<div id="spinner" class="d-flex justify-content-center align-items-center"><div  class="spinner-border text-info" style="width: 5rem; height: 5rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div></div>`)
+                        await this.fetchData(nextPage * 70)
+                         window.history.replaceState(null, null, `?page=${nextPage}`);
+                        var spinnerElem = document.getElementById('spinner');
+                        spinnerElem.parentNode.removeChild(spinnerElem);
+                        this.bottomReached = false
+                        // console.log('scrollHeight...', document.getElementById('collection-container').scrollHeight)
+                        // console.log('scrollTop...', document.getElementById('collection-container').scrollTop)
+                        // console.log('clientHeight...', document.getElementById('collection-container').clientHeight)
+                        //console.log('botton reached')
+                    }
+        
+        
+                };
+            }
+        
+            async fetchData(page) {
+                const gender = localStorage.getItem('gender')
+                const subcategory = localStorage.getItem('subcategory')
+                const category=  localStorage.getItem('category')
+                const url = `/atlas?gender=${gender}&category=${category}&subcategory=${subcategory}&page=${page}`
+                debugger;
+                const response = await fetch(url, { cache: 'default' })
+        
+                const { data } = await response.json()
+        
+                const collection = data.filter((d, i) => i)
+        
+                collection.forEach((col, i) => {
+                    const { imageUrl, priceBasket, priceNew, priceOld, title, link, basketDiscount, plcHolder, timestamp, discPerc } = col
+        
+                    document.getElementById('collection-container').insertAdjacentHTML('beforeend', `
+               <product-component id="pc-${i}" timestamp="${timestamp}"  class="p-component col-xl-2 col-lg-3 col-6 col-md-4" discPerc="${discPerc}" plcHolder="${plcHolder}" basketDiscount="${basketDiscount}" imageUrl="${imageUrl}" priceBasket="${priceBasket}" priceNew="${priceNew}" priceOld="${priceOld}"
+               title ="${title}" link="${link}"
+               ></product-component>
+                `)
+                })
+            }
+        })
+        
+        customElements.define('category-panel', class extends HTMLElement {
+          constructor() {
+            super()
+          }
+        
+          async connectedCallback() {
+            const gender = localStorage.getItem('gender')
+            debugger;
+            const respose = await fetch(`/categorynav?gender=${gender}`)
+            const {data} = await respose.json()
+            debugger;
+            data.forEach(function(d,i){
+              const {_id}=d;
+              debugger;
+              document.getElementById('d').insertAdjacentHTML(`<div class="accordion-item">
+              <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  Accordion Item #2
+                </button>
+              </h2>
+              <div id="panelsStayOpen-collapseTwo-${i}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>`)
+            })
+            debugger;
+            this.innerHTML = `
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                      MARKALAR
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+          list mark
+                    </div>
+                  </div>
+                </div>
+           
+           
+              </div>`
+          }
+        })
+       
+       
+        
+        customElements.define('product-navigation', class extends HTMLElement {
+        
+        constructor(){
+            super()
+        }
+        
+        async  connectedCallback(){
+        this.innerHTML='loading...'
+            const gender = localStorage.getItem('gender')
+            const category =localStorage.getItem('category')
+            const subcategory =localStorage.getItem('subcategory')
+            
+            const respose = await fetch(`/categorynav?gender=${gender}`)
+            const {data} = await respose.json()
+            console.log('data',data)
+            this.innerHTML=`<div class="accordion" id="accordion-container"></div>`
+            
+            data.forEach(function(d,i){
+                const {_id,subcategories,total}=d
+             
+                
+                document.getElementById('accordion-container').insertAdjacentHTML('beforeend',`<div class="accordion-item">
+                <h2 class="accordion-header" id="heading-${i}">
+                  <button  id="btn-${i}" data-category="${_id}" class="accordion-button collapsed collapser text-capitalize" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
+                   ${_id}
+                  </button>
+                </h2>
+                <div id="collapse-${i}" class="accordion-collapse ${category !==_id && 'collapse'}" aria-labelledby="heading-${i}" data-bs-parent="#accordion-container">
+                  <div class="accordion-body" id="accordion-body-${i}">
+                  <div class="d-flex justify-content-between mb-1">
+                  <a class="fw-lighter text-decoration-none text-capitalize" href="/${gender}/${_id}/index.html">Tümü</a><span class="badge bg-secondary rounded-pill fw-lighter">${total}</span></div>
+                  </div>
+                </div>
+                </div>
+              </div>`)
+        
+              subcategories.forEach(function(s){
+                  const {subtotal,subName}=s
+                //   if(subcategory===subName){
+                //     document.getElementById('container').insertAdjacentHTML('afterbegin',`<div>${subName.toUpperCase()}</div></div>Ürün Sayısı${subtotal}</div>`)
+                // }
+                  
+                  document.getElementById(`accordion-body-${i}`).insertAdjacentHTML('beforeend',`<div class="d-flex justify-content-between mb-1  "><a class="fw-lighter subcategory text-decoration-none text-capitalize ${subcategory===subName && 'text-decoration-underline fw-normal'}" href="/index.html" id="${subName}">${subName}</a><span class="badge bg-secondary rounded-pill fw-lighter">${subtotal}</span></div>`)
+        
+              })
+            })
+        
+            document.querySelectorAll('.subcategory').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    const { id } = e.target
+                    debugger;
+                    localStorage.setItem('subcategory', id)
+                    
+                    window.location.replace(e.target.href)
+                })
+            })
+        
+            document.querySelectorAll('.collapser').forEach(function(element){
+                element.addEventListener('click',function(e){
+                    const { dataset:{category} } = e.target
+            
+                    localStorage.setItem('category', category)
+                 window.location.replace("/index.html")
+                })
+            })
+            
+        }
+        })
+        
+        
+
+
+
+       </script>
 </body>
 </html>

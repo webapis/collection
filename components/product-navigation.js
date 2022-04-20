@@ -44,7 +44,7 @@ customElements.define('product-navigation', class extends HTMLElement {
             //     document.getElementById('container').insertAdjacentHTML('afterbegin',`<div>${subName.toUpperCase()}</div></div>Ürün Sayısı${subtotal}</div>`)
             // }
               
-              document.getElementById(`accordion-body-${i}`).insertAdjacentHTML('beforeend',`<div class="d-flex justify-content-between mb-1  "><a class="fw-lighter subcategory text-decoration-none text-capitalize ${subcategory===subName && 'text-decoration-underline fw-normal'}" href="/${gender}/${subName}/index.html" id="${subName}">${subName}</a><span class="badge bg-secondary rounded-pill fw-lighter">${subtotal}</span></div>`)
+              document.getElementById(`accordion-body-${i}`).insertAdjacentHTML('beforeend',`<div class="d-flex justify-content-between mb-1  "><a class="fw-lighter subcategory text-decoration-none text-capitalize ${subcategory===subName && 'text-decoration-underline fw-normal'}" href="/index.html" id="${subName}">${subName}</a><span class="badge bg-secondary rounded-pill fw-lighter">${subtotal}</span></div>`)
 
           })
         })

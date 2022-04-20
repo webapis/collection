@@ -89,7 +89,7 @@ customElements.define('search-tabs', class extends HTMLElement {
               localStorage.removeItem('page')
               localStorage.removeItem('category')
               localStorage.removeItem('subcategory')
-              window.location.replace('/'+id+'/index.html')
+              window.location.replace('/index.html')
           })
       })
     }
