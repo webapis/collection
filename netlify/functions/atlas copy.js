@@ -13,7 +13,6 @@ const headers = {
 exports.handler = async function (event, context) {
     const { gender, subcategory, page, category } = event.queryStringParameters
     const query = { subcategory: subcategory !== 'null' ? subcategory : undefined, category: category !== 'null' ? category : undefined, gender: gender !== 'null' ? gender : undefined }
-    
 
 for(let item in query){
     let current =query[item]
