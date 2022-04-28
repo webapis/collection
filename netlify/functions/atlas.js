@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const {nodeFetch}=require('../node-fetch')
+const {nodeFetch}=require('../../node-fetch')
 
 
 const headers = {
