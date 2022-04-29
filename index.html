@@ -201,7 +201,7 @@
 
       async connectedCallback() {
         const dataurl = localStorage.getItem('data-url')
-        localStorage.setItem('page', 1)
+        localStorage.setItem('page', 100)
         window.bottomReached = false
 
 
@@ -224,7 +224,7 @@
                 <div id="collection-container" class="row" style="height:100vh; overflow: scroll;">
              
                 </div>`
-        this.fetchData(0)
+        this.fetchData(100)
 
         const scroller = document.getElementById('collection-container')
         scroller.onscroll = async (ev) => {
@@ -235,12 +235,13 @@
           if (scrollHeight === (scrollTop + clientHeight) && !window.bottomReached) {
             window.bottomReached = true
             let prevPage = parseInt(localStorage.getItem('page'))
-            let nextPage = ++prevPage
+            let nextPage = prevPage+prevPage
             localStorage.setItem('page', nextPage)
+            debugger;
             document.getElementById('collection-container').insertAdjacentHTML('beforeend', `<div id="spinner" class="d-flex justify-content-center align-items-center"><div  class="spinner-border text-info" style="width: 5rem; height: 5rem;" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div></div>`)
-            this.fetchData(nextPage * 70).then(function () {
+            this.fetchData(nextPage).then(function () {
               debugger;
               window.history.replaceState(null, null, `?page=${nextPage}`);
               var spinnerElem = document.getElementById('spinner');
@@ -257,7 +258,7 @@
 
       fetchData(page) {
 
-
+debugger;
 
         debugger;
         const gender = localStorage.getItem('gender')
@@ -364,44 +365,41 @@
       connectedCallback() {
         this.innerHTML = 'loading...'
         const gender = localStorage.getItem('gender')
-        const category = localStorage.getItem('category')
-        const subcategory = localStorage.getItem('subcategory')
+        const selectedCategory = localStorage.getItem('category')
+        const selectedsubcat = localStorage.getItem('subcategory')
 
         fetch(`/categorynav?gender=${gender}`).then(function (response) { return response.json() }).then(function (jsonData) {
-
-
-
-          const { data } = jsonData
-          console.log('data', data)
           document.getElementsByTagName('product-navigation')[0].innerHTML = `<div class="accordion" id="accordion-container"></div>`
-
-          data.forEach(function (d, i) {
-            const { _id, subcategories, total } = d
-
+          for(let category in jsonData){
+            const current =jsonData[category]
+            const {total,subcategories} =current
+          
 
             document.getElementById('accordion-container').insertAdjacentHTML('beforeend', `<div class="accordion-item">
-                <h2 class="accordion-header" id="heading-${i}">
-                  <button  id="btn-${i}" data-category="${_id}" class="accordion-button collapsed collapser text-capitalize" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
-                   ${_id}
+                <h2 class="accordion-header" id="heading-${category}">
+                  <button  id="btn-${category}" data-category="${category}" class="accordion-button collapsed collapser text-capitalize" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${category}" aria-expanded="false" aria-controls="collapse-${category}">
+                    <span class="ml-5 badge bg-secondary rounded-pill fw-lighter">${total}</span><span> ${category}</span>
                   </button>
                 </h2>
-                <div id="collapse-${i}" class="accordion-collapse ${category !== _id && 'collapse'}" aria-labelledby="heading-${i}" data-bs-parent="#accordion-container">
-                  <div class="accordion-body" id="accordion-body-${i}">
+                <div id="collapse-${category}" class="accordion-collapse ${selectedCategory !== category && 'collapse'}" aria-labelledby="heading-${category}" data-bs-parent="#accordion-container">
+                  <div class="accordion-body" id="accordion-body-${category}">
                   <div class="d-flex justify-content-between mb-1">
-                  <a class="fw-lighter text-decoration-none text-capitalize" href="/${gender}/${_id}/index.html">Tümü</a><span class="badge bg-secondary rounded-pill fw-lighter">${total}</span></div>
+                  <a class="fw-lighter text-decoration-none text-capitalize" href="/${gender}/${category}/index.html">Tümü</a><span class="badge bg-secondary rounded-pill fw-lighter">${total}</span></div>
                   </div>
                 </div>
                 </div>
               </div>`)
 
             subcategories.forEach(function (s) {
-              const { subtotal, subName } = s
+              const { total, category,subcategory } = s
 
 
-              document.getElementById(`accordion-body-${i}`).insertAdjacentHTML('beforeend', `<div class="d-flex justify-content-between mb-1  "><a class="fw-lighter subcategory text-decoration-none text-capitalize ${subcategory === subName && 'text-decoration-underline fw-normal'}" href="/index.html" id="${subName}">${subName}</a><span class="badge bg-secondary rounded-pill fw-lighter">${subtotal}</span></div>`)
+              document.getElementById(`accordion-body-${category}`).insertAdjacentHTML('beforeend', `<div class="d-flex justify-content-between mb-1  "><a class="fw-lighter subcategory text-decoration-none text-capitalize ${selectedsubcat === subcategory && 'text-decoration-underline fw-normal'}" href="/index.html" id="${subcategory}">${subcategory}</a><span class="badge bg-secondary rounded-pill fw-lighter">${total}</span></div>`)
 
             })
-          })
+          }
+debugger;
+
 
           document.querySelectorAll('.subcategory').forEach(function (element) {
             element.addEventListener('click', function (e) {
