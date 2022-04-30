@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cucumber-js",
-    "fillMdb":"node fillMdb.js",
+    "fillMdb": "node fillMdb.js",
     "netlify": "netlify dev"
   },
   "repository": {
@@ -17,7 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^15.0.0",
-    "mongodb": "^4.3.1"
+    "mongodb": "^4.3.1",
+    "node-fetch": "^2.6.1"
   },
   "bugs": {
     "url": "https://github.com/webapis/collection/issues"

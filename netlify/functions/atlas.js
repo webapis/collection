@@ -1,7 +1,8 @@
 require('dotenv').config()
+const { MongoClient } = require('mongodb');
 
-const { nodeFetch } = require('../../nodefetch')
-
+//const uri = process.env.DEPLOY_URL === 'http://localhost:8888' ? process.env.mongodb_localUrl : process.env.mongodb_url;
+const uri = process.env.mongodb_url;
 
 const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -11,33 +12,31 @@ const headers = {
 
 exports.handler = async function (event, context) {
     const { gender, subcategory, page, category } = event.queryStringParameters
-    let spreadsheetId = ''
-    const start =page ==='100'? '2': parseInt(page)-99
-debugger;
-    if (gender) {
-        switch (gender) {
-            case 'erkek':
-                spreadsheetId = '1IeaYAURMnrbZAsQA_NO_LA_y_qq8MmwxjSo854vz5YM'
-                break;
-            case 'kadın':
-                spreadsheetId = '12mKtqxu5A-CVoXP_Kw36JxKiC69oPUUXVQmm7LUfh3s'
-                break;
-            default:
-        }
+    const query = { subcategory: subcategory !== 'null' ? subcategory : undefined, category: category !== 'null' ? category : undefined, gender: gender !== 'null' ? gender : undefined }
 
-        const response = await nodeFetch({ host: 'sheets.googleapis.com', path: `/v4/spreadsheets/${spreadsheetId}/values/DATA!A${start}:P${page}?majorDimension=ROWS&key=AIzaSyDb8Z27Ut0WJ-RH7Exi454Bpit9lbARJeA`, method: 'GET', headers: { 'User-Agent': 'node.js', 'Content-Type': 'application/json' } })
-debugger;
-        return {
-            statusCode: 200, headers,
-            body: response
-        }
-    } else {
-        return {
-            statusCode: 401, headers,
-            body: ''
-        }
+for(let item in query){
+    let current =query[item]
+    if(current===undefined){
+
+        delete query[item]
     }
 
+}
+    const skip = parseInt(page)
+ 
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    const clnt = await client.connect()
+    const collection = clnt.db("ecom").collection("collection2023");
+    const cursor = await collection.find(query).sort({"itemOrder":1}).skip(skip).limit(70)
+
+    const data = await cursor.toArray()
+debugger;
+    clnt.close()
+    debugger;
+    return {
+        statusCode: 200, headers,
+        body: JSON.stringify({ data })
+    }
 
 }
 
